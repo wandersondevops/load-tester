@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
+	"os"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -15,9 +17,11 @@ var (
 )
 
 func init() {
-	flag.StringVar(&url, "url", "", "URL do serviço a ser testado")
-	flag.IntVar(&requests, "requests", 0, "Número total de requests")
-	flag.IntVar(&concurrency, "concurrency", 0, "Número de chamadas simultâneas")
+	flag.StringVar(&url, "url", os.Getenv("URL"), "URL do serviço a ser testado")
+	req, _ := strconv.Atoi(os.Getenv("REQUESTS"))
+	con, _ := strconv.Atoi(os.Getenv("CONCURRENCY"))
+	flag.IntVar(&requests, "requests", req, "Número total de requests")
+	flag.IntVar(&concurrency, "concurrency", con, "Número de chamadas simultâneas")
 }
 
 type Result struct {
