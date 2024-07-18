@@ -15,7 +15,7 @@ Este projeto é um sistema CLI em Go para realizar testes de carga em um serviç
 
 ## Pré-requisitos
 
-- Docker e Docker Compose instalados na máquina.
+- Docker instalado na máquina.
 - Go instalado para compilar a aplicação.
 
 ## Como Executar
@@ -43,8 +43,23 @@ Este projeto é um sistema CLI em Go para realizar testes de carga em um serviç
     docker build -t load-tester .
     ```
 
-4. Execute o serviço com Docker Compose:
+# ATENÇAO
+
+4. Execute o serviço com o comando `docker run`, fornecendo os parâmetros necessários:
 
     ```sh
-    docker-compose up --build
+    docker run load-tester --url=http://google.com --requests=1000 --concurrency=10
     ```
+
+### Parâmetros
+
+- `--url`: URL do serviço a ser testado. (Obrigatório)
+- `--requests`: Número total de requests. (Obrigatório)
+- `--concurrency`: Número de chamadas simultâneas. (Obrigatório)
+
+### Exemplo de Uso
+
+Para testar a URL `http://example.com` com um total de 1000 requests e 10 chamadas simultâneas:
+
+```sh
+docker run load-tester --url=http://example.com --requests=1000 --concurrency=10

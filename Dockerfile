@@ -1,3 +1,4 @@
+
 # Use the official Golang image to create a build artifact.
 FROM golang:1.18 AS build
 
@@ -33,5 +34,6 @@ COPY --from=build /app/load-tester .
 # Verify the binary exists and is executable
 RUN ls -l load-tester
 
-# Command to run the executable with environment variables
-CMD ["sh", "-c", "URL=http://google.com REQUESTS=10 CONCURRENCY=10 ./load-tester"]
+# Command to run the executable
+ENTRYPOINT ["./load-tester"]
+    
